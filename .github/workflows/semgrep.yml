@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: ["master", "main"]
   schedule:
-    - cron: "0 21 * * 0" # Runs every Monday midnight
+    - cron: "0 21 * * 0" # Runs every Monday midnight utc+3
 
 jobs:
   semgrep:
@@ -16,7 +16,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Semgrep scan
-        uses: semgrep/semgrep-action@v2
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
         with:
-          config: auto
+          python-version: "3.12"
+
+      - name: Install Semgrep
+        run: pip install semgrep
+
+      - name: Run Semgrep
+        run: semgrep scan --config auto .
