@@ -1,0 +1,22 @@
+name: Semgrep Scan
+
+on:
+  push:
+    branches: ["master", "main"]
+  pull_request:
+    branches: ["master", "main"]
+  schedule:
+    - cron: "0 21 * * 0" # Runs every Monday midnight
+
+jobs:
+  semgrep:
+    name: Scan code with Semgrep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep scan
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: auto

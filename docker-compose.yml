@@ -6,10 +6,10 @@ services:
     restart: unless-stopped
     volumes:
       - ./models/init.sql:/docker-entrypoint-initdb.d/0_init.sql
-    ports:
-      - ${DB_PORT}:${DB_PORT}
-    expose:
-      - ${DB_PORT}
+    # ports:
+    #   - ${DB_PORT}:${DB_PORT}
+    # expose:
+    #   - ${DB_PORT}
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
@@ -23,10 +23,10 @@ services:
   mongodb:
     image: mongo
     container_name: mongodb
-    ports:
-      - 27018:27017
-    expose:
-      - 27018
+    # ports:
+    #   - 27018:27017
+    # expose:
+    #   - 27018
     environment:
       - MONGO_INITDB_ROOT_USERNAME=vuln_nodejs_app
       - MONGO_INITDB_ROOT_PASSWORD=supersecret
@@ -40,9 +40,9 @@ services:
     volumes:
       - .:/code
     ports:
-      - ${HOST_PORT}:${HOST_PORT}
-    expose:
-      - ${HOST_PORT}
+      - 127.0.0.1:${HOST_PORT}:${HOST_PORT}
+    # expose:
+    #   - ${HOST_PORT}
     environment:
       HOST_PORT: ${HOST_PORT}
       DB_NAME: ${DB_NAME}
