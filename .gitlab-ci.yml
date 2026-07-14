@@ -1,0 +1,9 @@
+stages:
+  - test
+
+# Include GitLab's built-in SAST template
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+sast:
+  stage: test
