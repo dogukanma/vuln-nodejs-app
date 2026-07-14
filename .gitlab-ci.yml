@@ -1,9 +1,7 @@
 stages:
   - test
 
-# Include GitLab's built-in SAST template
+# Include GitLab's modern SAST and Secret Detection templates
 include:
-  - template: Security/SAST.gitlab-ci.yml
-
-sast:
-  stage: test
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
